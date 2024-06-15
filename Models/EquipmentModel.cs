@@ -10,6 +10,6 @@ namespace RentalTest.Models
         public DateTime LastMaintenanceDate { get; set; }
         public decimal RentalRate { get; set; }
         public IStatus Status { get; set; } = new StatusModel();
-        public IEquipment Equipment { get; set; } = new EquipmentModel();
+        public ICategory Category { get; set; } = new CategoryModel();
     }
 }

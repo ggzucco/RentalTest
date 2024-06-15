@@ -9,6 +9,6 @@
         public decimal RentalRate { get; set; }
 
         public IStatus Status { get; set; }
-        public IEquipment Equipment { get; set;}
+        public ICategory Category { get; set;}
     }
 }
