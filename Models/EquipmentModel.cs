@@ -14,10 +14,10 @@ namespace RentalTest.Models
         public int CategoryId { get; set; }
         public int StatusId { get; set; }
 
-        [JsonIgnore]
-        public StatusModel Status { get; set; } = new StatusModel();
+        //[JsonIgnore]
+        //public StatusModel Status { get; set; } = new StatusModel();
 
-        [JsonIgnore]
-        public CategoryModel Category { get; set; } = new CategoryModel();
+        //[JsonIgnore]
+        //public CategoryModel Category { get; set; } = new CategoryModel();
     }
 }
