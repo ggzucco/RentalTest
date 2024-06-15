@@ -1,4 +1,6 @@
-﻿namespace RentalTest.Interfaces
+﻿using RentalTest.Models;
+
+namespace RentalTest.Interfaces
 {
     public interface IEquipment
     {
@@ -8,7 +10,10 @@
         public DateTime LastMaintenanceDate { get; set; }
         public decimal RentalRate { get; set; }
 
-        public IStatus Status { get; set; }
-        public ICategory Category { get; set;}
+        public int CategoryId { get; set; }
+        public int StatusId { get; set; }
+
+        public StatusModel Status { get; set; }
+        public CategoryModel Category { get; set;}
     }
 }

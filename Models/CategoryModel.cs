@@ -6,5 +6,7 @@ namespace RentalTest.Models
     {
         public int CategoryId { get; set; }
         public string Name { get; set; } = string.Empty;
+
+        public ICollection<EquipmentModel> Equipments { get; set; } = new List<EquipmentModel>();
     }
 }

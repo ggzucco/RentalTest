@@ -9,7 +9,11 @@ namespace RentalTest.Models
         public string Location { get; set; } = string.Empty;
         public DateTime LastMaintenanceDate { get; set; }
         public decimal RentalRate { get; set; }
-        public IStatus Status { get; set; } = new StatusModel();
-        public ICategory Category { get; set; } = new CategoryModel();
+
+        public int CategoryId { get; set; }
+        public int StatusId { get; set; }
+
+        public StatusModel Status { get; set; } = new StatusModel();
+        public CategoryModel Category { get; set; } = new CategoryModel();
     }
 }
