@@ -9,11 +9,7 @@ namespace RentalTest.Interfaces
         public string Location { get; set; }
         public DateTime LastMaintenanceDate { get; set; }
         public decimal RentalRate { get; set; }
-
         public int CategoryId { get; set; }
         public int StatusId { get; set; }
-
-        public StatusModel Status { get; set; }
-        public CategoryModel Category { get; set;}
     }
 }

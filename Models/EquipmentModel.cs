@@ -1,4 +1,5 @@
 ﻿using RentalTest.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace RentalTest.Models
 {
@@ -13,7 +14,10 @@ namespace RentalTest.Models
         public int CategoryId { get; set; }
         public int StatusId { get; set; }
 
+        [JsonIgnore]
         public StatusModel Status { get; set; } = new StatusModel();
+
+        [JsonIgnore]
         public CategoryModel Category { get; set; } = new CategoryModel();
     }
 }

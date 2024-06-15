@@ -4,9 +4,14 @@ using SQLitePCL;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.AllowTrailingCommas = true;
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 builder.Services.AddDbContext<RentalContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));

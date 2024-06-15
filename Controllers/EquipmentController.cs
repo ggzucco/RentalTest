@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using RentalTest.Models;
 using RentalTest.Interfaces;
+using SQLitePCL;
+using RentalTest.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace RentalTest.Controllers
 {
@@ -9,71 +12,61 @@ namespace RentalTest.Controllers
     public class EquipmentController : ControllerBase
     {
         private readonly ILogger<EquipmentController> _logger;
-
-        public EquipmentController(ILogger<EquipmentController> logger)
+        private readonly RentalContext _context;
+        public EquipmentController(ILogger<EquipmentController> logger, RentalContext context)
         {
             _logger = logger;
+            _context = context;
         }     
 
         [HttpGet]
-        public IEnumerable<IEquipment> Get()
+        public IEnumerable<EquipmentModel> GetAll()
         {
-            return new List<IEquipment>
-            {
-                new EquipmentModel 
-                { 
-                    EquipmentId = 1, 
-                    Name = "Excavator A", 
-                    Location = "Mines", 
-                    LastMaintenanceDate = DateTime.Now,
-                    RentalRate = 10.00m,
-                    Status = new StatusModel { StatusId = 1, Name = "Available" },
-                    Category = new CategoryModel { CategoryId = 1, Name = "Excavator" }
-                },
-                new EquipmentModel
-                {
-                    EquipmentId = 2,
-                    Name = "Excavator B",
-                    Location = "Mines",
-                    LastMaintenanceDate = DateTime.Now,
-                    RentalRate = 10.00m,
-                    Status = new StatusModel { StatusId = 1, Name = "Available" },
-                    Category = new CategoryModel { CategoryId = 1, Name = "Excavator" }
-                },
-            };
+            return _context.Equipment.ToList();           
         }
 
         [HttpGet("{id}")]
-        public IEquipment Get(int id)
+        public async Task<EquipmentModel> Get(int id)
         {
-            return new EquipmentModel
-            {
-                EquipmentId = 1,
-                Name = "Excavator A",
-                Location = "Mines",
-                LastMaintenanceDate = DateTime.Now,
-                RentalRate = 10.00m,
-                Status = new StatusModel { StatusId = 1, Name = "Available" },
-                Category = new CategoryModel { CategoryId = 1, Name = "Excavator" }
-            };
+            return await _context.Equipment.FindAsync(id);
         }
         
         [HttpPost]
-        public IEquipment Post(IEquipment equipment)
+        public async Task<ActionResult<EquipmentModel>> Post(EquipmentModel equipment)
         {
-            return equipment;
+            _context.Equipment.Add(equipment);
+            await _context.SaveChangesAsync();
+
+            return Ok(equipment);           
         }
         
         [HttpPut("{id}")]
-        public IEquipment Put(int id, IEquipment equipment)
+        public async Task<ActionResult<EquipmentModel>> Put(int id, EquipmentModel equipment)
         {
-            return equipment;
+            if (id != equipment.EquipmentId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(equipment).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
         
         [HttpDelete("{id}")]
-        public IEquipment Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return new EquipmentModel();
+            var equipment = await _context.Equipment.FindAsync(id);
+            if (equipment == null)
+            {
+                return NotFound();
+            }
+
+            _context.Equipment.Remove(equipment);
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }    
     }
 }
