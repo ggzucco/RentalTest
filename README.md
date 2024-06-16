@@ -1,3 +1,17 @@
+## Project Title: Equipment Management App
+### Developed by: Guilherme Gomes Zucco
+
+## Description:
+A simple web application for managing a list of equipment, demonstrating skills in DotNet 8, AspNet 8, Entity Framework Core, SQLite, APi, Swagger.
+
+## Technologies Used:
+- DotNet 8
+- AspNet 8
+- Entity Framework Core
+- SQLite
+- APi
+- Swagger
+
 ## Setup and Run Backend AspNet Application
   
 1. **Download the files from Github**
